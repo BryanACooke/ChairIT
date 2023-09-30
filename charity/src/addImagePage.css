@@ -1,0 +1,26 @@
+.imageView{
+    width: 50%;
+    height: 50%;
+    border-radius: 137px;
+}
+
+input::file-selector-button{
+    
+}
+
+.inputData{
+    
+}
+
+.enterButtonData{
+    display: inline-flex;
+    padding: 35px;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 147px;
+background: #6DB340;
+box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+border: none;
+
+}

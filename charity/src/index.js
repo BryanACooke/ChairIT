@@ -8,6 +8,8 @@ import SignInPage from './signupPage';
 import DonationInformation from './donationInfo';
 import { addItemImages } from 'react-router-dom';
 import AddItemImage from './addItemImages';
+import DonateOrSubmit from './donateOrSubmit';
+import VolunteerRate from './volunteerRate';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -25,6 +27,8 @@ root.render(
      <Route path="/SignInPage" element={<SignInPage/>} /> 
      <Route path="/DonationInformation" element={<DonationInformation/>} />
       <Route path="/AddItemImage" element={<AddItemImage/>} />
+      <Route path="/DonateOrSubmit" element={<DonateOrSubmit/>} />
+      <Route path="/VolunteerRate" element={<VolunteerRate/>} />
       </Routes>
       
     

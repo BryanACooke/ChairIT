@@ -1,0 +1,95 @@
+.backgroundColor{
+    background-color: #314D89;
+
+}
+
+.donateOrSubmitPage{
+    width: 100%;
+    height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+}
+.whiteFont{
+    color: white;
+}
+
+.donateButtonText{
+    color: #FFF;
+    display: flex;
+    flex-direction: row;
+
+
+}
+
+.donateButtonText{
+    color: #FFF;
+    display: flex;
+    flex-direction: row;
+}
+.approveButton{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 10px 10px 10px;
+}
+.donateButton{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 10px 10px 10px;
+}
+
+.approveButtonButton{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 10px 10px 10px;
+    width: 100px;
+    height: 50px;
+    background-color: #6DB340;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.donateButtonButton{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 10px 10px 10px;
+    width: 100px;
+    height: 50px;
+    background-color: #6DB340;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+.approveButtonText{
+    color: #FFF;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 10px 10px 10px;
+
+}
+
+.donateOrSubmitButtons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 10px 10px 10px;
+
+}
