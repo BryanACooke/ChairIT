@@ -5,10 +5,23 @@ import onehour from './assets/onehour.png';
 import twohour from './assets/twohours.png';
 import threehour from './assets/threehours.png';
 
-import starGrey from './assets/starGrey.png';
-import starYellow from './assets/starYellow.png';
+import starImage from './assets/starGrey.png';
+import selectedStarImage from './assets/starYellow.png';
+import React, { useState } from 'react';
+
+
+
+
 
 function VolunteerRate() {
+
+    const [selectedRating, setSelectedRating] = useState(null);
+
+  const handleStarClick = (rating) => {
+    setSelectedRating(rating);
+  };
+
+
     return (
         <div className="volunteerRateMainDiv backgroundColor">
             <div className="headerDiv">
@@ -21,7 +34,7 @@ function VolunteerRate() {
                         <img className="rewardBadgeImage" src={twohour} alt={`Preview`} />
                     </div>
                     <div className="rewardBadge">
-                        <img className="rewardBadgeImage" src={threehour} alt={`Preview`} />
+                        <img className="rewardBadgeImage addBlur" src={threehour} alt={`Preview`} />
                     </div>
                 </div>
             </div>
@@ -51,35 +64,25 @@ function VolunteerRate() {
                         <h1> Please rate the quality of this item </h1>
                     </div>
                     <div className="starRatingDiv">
-                        <input type="radio" id="star5" name="rating" value="5" />
-                        <label htmlFor="star5">
-                            <img className="greyStar" src={starGrey} alt="Star" />
-                        </label>
+                    {[1,2,3,4,5].map((rating) => (
+                     <div key={rating}>
+          <input type="radio" id={`star${rating}`} name="rating" value={rating} style={{ display: 'none' }} />
+          <label
+            htmlFor={`star${rating}`}
+            className={`star ${selectedRating >= rating ? 'selectedStar' : 'greyStar'}`}
+            onClick={() => handleStarClick(rating)}
+          >
+            <img src={selectedRating >= rating ? selectedStarImage : starImage} alt="Star" />
+          </label>
+        </div>
 
-                        <input type="radio" id="star4" name="rating" value="4" />
-                        <label htmlFor="star4">
-                            <img className="greyStar" src={starGrey} alt="Star" />
-                        </label>
-
-                        <input type="radio" id="star3" name="rating" value="3" />
-                        <label htmlFor="star3">
-                            <img className="greyStar" src={starGrey} alt="Star" />
-                        </label>
-
-                        <input type="radio" id="star2" name="rating" value="2" />
-                        <label htmlFor="star2">
-                            <img className="greyStar" src={starGrey} alt="Star" />
-                        </label>
-
-                        <input type="radio" id="star1" name="rating" value="1" />
-                        <label htmlFor="star1">
-                            <img className="greyStar" src={starGrey} alt="Star" />
-                        </label>
-                    </div>
+      ))}
+    </div>
+    <div className="divButtonQual">
+        <button className="continueButton continueButtonMoreStyle addSpace">Submit</button>
+                        </div>
                 </div>
             </div>
-
-
 
 
 
