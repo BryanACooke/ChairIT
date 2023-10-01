@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import session
+from flask_cors import CORS
 import mysql.connector
 
 endpoint = "localhost"
@@ -60,11 +61,11 @@ def addproduct():
 
 @app.route('/get_image/<int:Product_id>')
 def getImg(Product_id):
-    get_sql = "SELECT Rating, ImgPath FROM product WHERE ProductID = '%s'" %(Product_id)
+    get_sql = "SELECT Name, ImgPath FROM product WHERE ProductID = '%s'" %(Product_id)
     Cursor.execute(get_sql)
     result = Cursor.fetchall()
     return({
-        "Rating" : result[0][0],
+        "Name" : result[0][0],
         "ImgPath" : result[0][1],
     })
 
@@ -72,20 +73,19 @@ def getImg(Product_id):
 @app.route('/Rerate', methods=['PATCH'])
 def rerate():
     rating = request.get_json()
-    rating['ProductID']
-    rerate_sql = "SELECT Rating, NumRatings FROM product WHERE ProductID = '%s'" %(rating['ProductID'])
+    rerate_sql = "SELECT Rating, NumRatings FROM product WHERE ProductID = '%s'" %(rating['ID'])
     Cursor.execute(rerate_sql)
-
     Rates = Cursor.fetchall()
-    Rating = int(Rates[0])
-    Num = int(Rates[1])
-    NewRating = int(rating['Rating'])
+    Rating = int(Rates[0][0])
+    Num = int(Rates[0][1])
+    NewRating = int(rating['rating'])
     UpdateRating = (Rating * Num + NewRating) / Num + 1
     Num += 1
-    Update_Sql = "UPDATE product SET Rating = %s, NumRatings = %s" % (UpdateRating, Num)
-    Cursor.execute(UpdateRating)
-    Connection.commit()
-    return({"Status" : "New Rating set"})
+    print("New Rating: ",UpdateRating)
+    #Update_Sql = "UPDATE product SET Rating = %s, NumRatings = %s" % (UpdateRating, Num)
+    #Cursor.execute(Update_Sql)
+    #Connection.commit()
+    return({"Status" : True})
 
 
 @app.route('/user_prod/<int:User_id>', methods = ['GET'])
@@ -94,6 +94,17 @@ def products(User_id):
     Cursor.execute(prod_Sql)
     products = Cursor.fetchall()
     return(products)
+
+@app.route('/render',methods = ['GET'])
+def render():
+    get_sql = "SELECT ProductID, ImgPath, Name FROM product WHERE NumRatings = (SELECT MIN(NumRatings) FROM product)"
+    Cursor.execute(get_sql)
+    result = Cursor.fetchall()
+    print(result[0][0])
+    return({"ID" : result[0][0],
+            "Img":result[0][1],
+            "Name":result[0][2]
+            })
 
 if __name__ == '__main__':
     app.run(debug=True)
