@@ -23,28 +23,7 @@ function VolunteerRate() {
         setSelectedRating(rating);
     };
 
-    useEffect(() => {
-        axios.get('/render').then((response) => {
-            console.log(response.data);
-            setResponse(response.data);
-            setUserID(response.data.ID);
-        }).catch((error) => {
-            console.log(error);
-        });
-    }, []);
-
-const postData = {
-    "rating": selectedRating,
-    "ID": userID
-}
-
-const url="/Rerate";
-
-axios.post(url, postData).then((response) => {
-    console.log(response.data);
-}).catch((error) => {
-    console.log(error);
-});
+   
 
 
     return (
