@@ -1,11 +1,12 @@
 import './signUpPage.css';
 import React, { useState, useEffect } from "react";
-
-
+import {useNavigate} from "react-router-dom"
+import {Link} from 'react-router-dom'
 
 function SignInPage(){
     const [Email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const Login = () => {
         const data = {Email,password}
@@ -18,7 +19,11 @@ function SignInPage(){
             body: JSON.stringify(data)
         }).then((ress) => 
         ress.json().then((returned) => {
-          console.log(returned)
+          console.log(returned);
+          console.log(returned.Status);
+          if (returned.Status == true){
+            navigate("/");
+          }
         })
         );
     }

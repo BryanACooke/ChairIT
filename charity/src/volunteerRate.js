@@ -8,14 +8,15 @@ import axios from 'axios';
 import starImage from './assets/starGrey.png';
 import selectedStarImage from './assets/starYellow.png';
 import React, { useEffect, useState } from 'react';
-
+import {useNavigate} from 'react-router-dom'
 
 
 
 
 function VolunteerRate() {
+    const navigate = useNavigate();
     const [selectedRating, setSelectedRating] = useState(null);
-    const [response, setResponse] = useState(null);
+    const [response, setResponse] = useState("");
     const [userID, setUserID] = useState(null);
 
     const handleStarClick = (rating) => {
@@ -42,6 +43,9 @@ const url="/Rerate";
 
 axios.post(url, postData).then((response) => {
     console.log(response.data);
+    if (response.data.Status == true){
+    window.location.reload();
+    }
 }).catch((error) => {
     console.log(error);
 });
@@ -66,17 +70,20 @@ axios.post(url, postData).then((response) => {
 
             <div className="objectHolder">
                 <div className="titleObjectDiv">
-                    <h1 className="objectTitle">Desk Chair <span className="objectDescription">| 5 years of use</span></h1>
+                    <h1 className="objectTitle">{response.Name} </h1>
                 </div>
                 <div className="imageObjectDiv">
                     <table>
                         <tbody>
                             <tr>
                                 <td>
-                                    <img className="imageView" src="https://m.media-amazon.com/images/I/711Twwp3P5L.jpg" alt={`Preview`} />
+                                    <img className="imageView" src={response.Img} alt={`Preview`} />
                                 </td>
                                 <td>
-                                    <img className="imageView" src="https://m.media-amazon.com/images/I/711Twwp3P5L.jpg" alt={`Preview`} />
+                                    <img className="imageView" src={response.Img} alt={`Preview`} />
+                                </td>
+                                <td>
+                                    <img className="imageView" src={response.Img} alt={`Preview`} />
                                 </td>
                             </tr>
                         </tbody>

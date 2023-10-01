@@ -2,6 +2,8 @@ import './App.css';
 import landingBackground from './assets/landingBackgroundImage.png';
 import logo from './assets/hhLogo.png';
 import frontPageImage from './assets/imageFrontPage.png';
+import {Link} from 'react-router-dom';
+
 
 function App() {
   return (
@@ -22,11 +24,11 @@ function App() {
 
     <div className="buttonContainer">
       <div className="getStartedButton">
-      <h1 className="innerButtonFont">Donate</h1>
+      <Link to="/DonationInformation"><h1 className="innerButtonFont">Donate</h1></Link>
       </div>
       
       <div className="getStartedButton">
-      <h1 className="innerButtonFont">E-Volunteer</h1>
+     <Link to="/VolunteerRate"> <h1 className="innerButtonFont">E-Volunteer</h1></Link>
 
       </div>
 

@@ -1,7 +1,6 @@
 from flask import Flask
 from flask import request
 from flask import session
-from flask_cors import CORS
 import mysql.connector
 
 endpoint = "localhost"
@@ -28,6 +27,7 @@ def start():
 
 @app.route("/login", methods=['POST'])
 def login():
+    session['UserID'] = 0
     print("login")
     log = request.get_json()
     print(log['password'])
@@ -41,6 +41,7 @@ def login():
         return({"Status": False})
     elif result[0][1] == log['password']:
         session['UserID'] = result[0][0]
+
         return({"Status": True})
     elif result != log['password']:
         return({"Status":False})
@@ -56,8 +57,13 @@ def signup():
 @app.route("/addproduct", methods=["POST"])
 def addproduct():
     add = request.get_json()
-    add_sql = "Insert INTO product (Name,Rating,UserID,ImgPath,Description,NumRatings,Prodtype) Values (%s,%s,%s,%s,%s,1,%s)"
-
+    print(add)
+    add_sql = "Insert INTO product (Name,UserID,ImgPath,Rating,NumRatings,Prodtype) Values ('%s',%s,'%s',0,0,'%s')"\
+        %(add['name'],session['UserID'],add['img'],add['category'])
+    print(add_sql)
+    Cursor.execute(add_sql)
+    Connection.commit()
+    return({"Status" : True})
 
 @app.route('/get_image/<int:Product_id>')
 def getImg(Product_id):

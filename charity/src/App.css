@@ -68,6 +68,7 @@ text-decoration: none;
   flex-direction: column;
 text-align: center;
 justify-items: center;
+margin-top: 10px;
 font-size: 16px;
 
 font-style: normal;
