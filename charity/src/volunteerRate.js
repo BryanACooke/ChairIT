@@ -32,6 +32,7 @@ function VolunteerRate() {
         });
     }, []);
 
+function handleSubmitButton(){
 const postData = {
     "rating": selectedRating,
     "ID": userID
@@ -44,7 +45,7 @@ axios.post(url, postData).then((response) => {
 }).catch((error) => {
     console.log(error);
 });
-
+}
 
     return (
         <div className="volunteerRateMainDiv backgroundColor">
@@ -103,7 +104,7 @@ axios.post(url, postData).then((response) => {
       ))}
     </div>
     <div className="divButtonQual">
-        <button className="continueButton continueButtonMoreStyle addSpace">Submit</button>
+        <button onClick={handleSubmitButton} className="continueButton continueButtonMoreStyle addSpace">Submit</button>
                         </div>
                 </div>
             </div>

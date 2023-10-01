@@ -70,21 +70,22 @@ def getImg(Product_id):
     })
 
 
-@app.route('/Rerate', methods=['PATCH'])
+@app.route('/Rerate', methods=['POST'])
 def rerate():
     rating = request.get_json()
+    print(rating)
     rerate_sql = "SELECT Rating, NumRatings FROM product WHERE ProductID = '%s'" %(rating['ID'])
     Cursor.execute(rerate_sql)
     Rates = Cursor.fetchall()
     Rating = int(Rates[0][0])
     Num = int(Rates[0][1])
     NewRating = int(rating['rating'])
-    UpdateRating = (Rating * Num + NewRating) / Num + 1
+    UpdateRating = (Rating * Num + NewRating) / (Num + 1)
     Num += 1
     print("New Rating: ",UpdateRating)
-    #Update_Sql = "UPDATE product SET Rating = %s, NumRatings = %s" % (UpdateRating, Num)
-    #Cursor.execute(Update_Sql)
-    #Connection.commit()
+    Update_Sql = "UPDATE product SET Rating = %s, NumRatings = %s WHERE ProductID = %s" % (UpdateRating, Num,rating['ID'])
+    Cursor.execute(Update_Sql)
+    Connection.commit()
     return({"Status" : True})
 
 
