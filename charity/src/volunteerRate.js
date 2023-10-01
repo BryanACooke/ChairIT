@@ -7,19 +7,44 @@ import threehour from './assets/threehours.png';
 
 import starImage from './assets/starGrey.png';
 import selectedStarImage from './assets/starYellow.png';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 
 
 
 
 function VolunteerRate() {
-
+    const axios = require('axios');
     const [selectedRating, setSelectedRating] = useState(null);
+    const [response, setResponse] = useState(null);
+    const [userID, setUserID] = useState(null);
 
-  const handleStarClick = (rating) => {
-    setSelectedRating(rating);
-  };
+    const handleStarClick = (rating) => {
+        setSelectedRating(rating);
+    };
+
+    useEffect(() => {
+        axios.get('/render').then((response) => {
+            console.log(response.data);
+            setResponse(response.data);
+            setUserID(response.data.ID);
+        }).catch((error) => {
+            console.log(error);
+        });
+    }, []);
+
+const postData = {
+    "rating": selectedRating,
+    "ID": userID
+}
+
+const url="/Rerate";
+
+axios.post(url, postData).then((response) => {
+    console.log(response.data);
+}).catch((error) => {
+    console.log(error);
+});
 
 
     return (
